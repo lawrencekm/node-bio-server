@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3008:3008"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/veindata
+      - PORT=3008
+    depends_on:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+      
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+volumes:
+  mongo-data:
+
+networks:
+  app-network:
+    driver: bridge
