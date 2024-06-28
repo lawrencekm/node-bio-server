@@ -8,7 +8,8 @@ const authDataSchema = new Schema({
     },
     user_id: {
         type: String,
-        required: true
+        required: true,
+        index: true // Non-unique index
     },
     sensortype: {
         type: Number,
@@ -62,8 +63,10 @@ const authDataSchema = new Schema({
     versionKey: false // Disable the "__v" field which is used for versioning in Mongoose
 });
 
-// Create a composite unique index without client_id
-authDataSchema.index({ user_id: 1, client_app_id: 1, sensortype: 1, datatype: 1 }, { unique: true });
+// Create a non-unique index on the user_id field
+authDataSchema.index({ user_id: 1 });
+
+// Note: The _id field is automatically created by MongoDB and is unique by default
 
 const AuthData = mongoose.model('AuthData', authDataSchema);
 
