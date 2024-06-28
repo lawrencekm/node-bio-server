@@ -43,16 +43,25 @@ router.post('/upload', upload.single('veindata'), async (req, res) => {
     }
 });
 
-
+function isValidDate(d) {
+    return d instanceof Date && !isNaN(d);
+}
 //upload 1 by one
 router.post('/upload64', async (req, res) => {
+
     try {
         console.log('Received upload Base64 request');
-        console.log(req.body.id);
+        console.log(req.body);
 
         const { sensortype, datatype, id, name, address, enrolled, last_authenticated, authentication_count, external_id, group_id, palm, veindata } = req.body;
 
         const veindataBuffer = Buffer.from(veindata, 'base64');
+       
+        const enrolledDate = new Date(enrolled);
+        const lastAuthenticatedDate = new Date(last_authenticated);
+
+        const validEnrolledDate = isValidDate(enrolledDate) ? enrolledDate : new Date();
+        const validLastAuthenticatedDate = isValidDate(lastAuthenticatedDate) ? lastAuthenticatedDate : new Date();
 
         const veinData = new VeinData({
             sensortype,
@@ -61,8 +70,8 @@ router.post('/upload64', async (req, res) => {
             veindata: veindataBuffer,
             name,
             address,
-            enrolled: enrolled ? new Date(enrolled) : null,
-            last_authenticated: last_authenticated ? new Date(last_authenticated) : null,
+            enrolled: validEnrolledDate,
+            last_authenticated: validLastAuthenticatedDate,
             authentication_count,
             external_id,
             group_id,
