@@ -62,8 +62,8 @@ const authDataSchema = new Schema({
     versionKey: false // Disable the "__v" field which is used for versioning in Mongoose
 });
 
-// Create a composite unique index
-authDataSchema.index({ user_id: 1, client_id: 1, client_app_id: 1, sensortype: 1, datatype: 1 }, { unique: true });
+// Create a composite unique index without client_id
+authDataSchema.index({ user_id: 1, client_app_id: 1, sensortype: 1, datatype: 1 }, { unique: true });
 
 const AuthData = mongoose.model('AuthData', authDataSchema);
 
