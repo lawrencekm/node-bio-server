@@ -2,8 +2,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+
 const uploadRoute = require('./routes/upload');
 const downloadRoute = require('./routes/download');
+const usersRoute = require('./routes/users');
+const authenticationsRoute = require('./routes/authdata');
+const authApiRoute = require('./routes/authApi');
+const AuthData = require('./models/AuthData');
 
 dotenv.config();
 
@@ -16,8 +21,15 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));
 
+    // Set up view engine
+app.set('view engine', 'ejs');
+
 app.use('/api', uploadRoute);
 app.use('/api', downloadRoute);
+app.use('/users', usersRoute);
+app.use('/auth', authenticationsRoute);
+app.use('/api', authApiRoute );
+
 
 const port = process.env.PORT || 3008;
 app.listen(port, () => {

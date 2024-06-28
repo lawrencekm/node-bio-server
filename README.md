@@ -1,7 +1,20 @@
 Just give it a mime type of "application/octet-stream" -- which is basically a generic mime type for binary data with no further specification of just what sort -- and any proxies along the way should leave it alone.
 
 
-
+curl -X POST https://node-bio-server.sozuri.net/api/upload64      -H "Content-Type: application/json"      -d '{
+           "sensortype": "sensor_type_value",
+           "datatype": "data_type_value",
+           "id": "id_value",
+           "name": "name_value",
+           "address": "address_value",
+           "enrolled": "2024-06-24T12:34:56Z",
+           "last_authenticated": "2024-06-24",
+           "authentication_count": 5,
+           "external_id": "external_id_value",
+           "group_id": "group_id_value",
+           "palm": "palm_value",
+           "veindata": "base64_encoded_data"
+         }'
 
 
 

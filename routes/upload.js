@@ -48,7 +48,7 @@ router.post('/upload', upload.single('veindata'), async (req, res) => {
 router.post('/upload64', async (req, res) => {
     try {
         console.log('Received upload Base64 request');
-        console.log(req);
+        console.log(req.body.id);
 
         const { sensortype, datatype, id, name, address, enrolled, last_authenticated, authentication_count, external_id, group_id, palm, veindata } = req.body;
 
@@ -70,10 +70,11 @@ router.post('/upload64', async (req, res) => {
         });
 
         await veinData.save();
+        console.log(veinData.id +""+veinData.name);
         res.status(200).send('Upload Base64 successful');
     } catch (err) {
-        console.error('Error Base64 saving file:', err.message);
-        res.status(500).send('Error Base64 saving file: ' + err.message);
+        console.error('Error Base64 saving:', err.message);
+        res.status(500).send('Error Base64 saving: ' + err.message);
     }
 });
 module.exports = router;

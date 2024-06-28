@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IdentoSecure User Bio-ata Records</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>IdentoSecure User PalmVein Bio-data Records</h1>
+    <form method="get" action="/users/veindata">
+        <input type="text" name="search" value="<%= searchQuery %>" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Enrolled</th>
+                <th>Last Authenticated</th>
+                <th>Authentication Count</th>
+                <th>External ID</th>
+                <th>Group ID</th>
+                <th>Palm</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% veindata.forEach(record => { %>
+                <tr>
+                    <td><%= record.id %></td>
+                    <td><%= record.name || '' %></td>
+                    <td><%= record.address || '' %></td>
+                    <td><%= record.enrolled ? record.enrolled.toLocaleString() : '' %></td>
+                    <td><%= record.last_authenticated ? record.last_authenticated.toLocaleString() : '' %></td>
+                    <td><%= record.authentication_count %></td>
+                    <td><%= record.external_id || '' %></td>
+                    <td><%= record.group_id || '' %></td>
+                    <td><%= record.palm != null ? record.palm : '' %></td>
+                    <td>
+                        <button onclick="deleteRecord('<%= record._id %>')">Delete</button>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <div>
+        <% if (currentPage > 1) { %>
+            <a href="/users/veindata?page=<%= currentPage - 1 %>&search=<%= searchQuery %>">Previous</a>
+        <% } %>
+        <% if (currentPage < totalPages) { %>
+            <a href="/users/veindata?page=<%= currentPage + 1 %>&search=<%= searchQuery %>">Next</a>
+        <% } %>
+    </div>
+    <script>
+        function deleteRecord(id) {
+            if (confirm('Are you sure you want to delete this record?')) {
+                $.ajax({
+                    url: '/users/veindata/' + id,
+                    type: 'DELETE',
+                    success: function(result) {
+                        alert('Record deleted successfully');
+                        location.reload();
+                    },
+                    error: function(err) {
+                        alert('Error deleting record: ' + err.responseText);
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+</html>

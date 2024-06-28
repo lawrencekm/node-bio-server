@@ -27,7 +27,7 @@ router.get('/download', async (req, res) => {
         form.append('palm', veinData.palm.toString());
         form.append('veindata', veinData.veindata, 'veindata.bin');
 
-        console.log('Form data constructed:');
+        console.log('Form data constructed by download:');
         console.log(`sensortype: ${veinData.sensortype}`);
         console.log(`datatype: ${veinData.datatype}`);
         console.log(`id: ${veinData.id}`);
