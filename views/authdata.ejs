@@ -156,10 +156,10 @@
         </table>
         <div class="pagination">
             <% if (currentPage > 1) { %>
-                <a href="/authdata?page=<%= currentPage - 1 %>&search=<%= searchQuery %>">Previous</a>
+                <a href="/auth/authdata?page=<%= currentPage - 1 %>&search=<%= searchQuery %>">Previous</a>
             <% } %>
             <% if (currentPage < totalPages) { %>
-                <a href="/authdata?page=<%= currentPage + 1 %>&search=<%= searchQuery %>">Next</a>
+                <a href="/auth/authdata?page=<%= currentPage + 1 %>&search=<%= searchQuery %>">Next</a>
             <% } %>
         </div>
         <button class="button" onclick="location.href='/'">Go back home</button>

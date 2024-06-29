@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const path = require('path');
 
 const uploadRoute = require('./routes/upload');
 const downloadRoute = require('./routes/download');
@@ -29,6 +30,9 @@ app.use('/api', downloadRoute);
 app.use('/users', usersRoute);
 app.use('/auth', authenticationsRoute);
 app.use('/api', authApiRoute );
+
+// Serve static files from the "assets" directory
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/', (req, res) => {
     res.render('index');

@@ -60,6 +60,27 @@
         ul {
             text-align: left;
         }
+        .screenshots {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .screenshot {
+            flex: 1 1 30%;
+            margin: 10px;
+            text-align: center;
+        }
+        .screenshot img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .screenshot p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -71,7 +92,7 @@
             <h2>How It Works</h2>
             <p>The infrastructure consists of a cloud server for remote/backup storage and a mobile app(with scanner device attached) for capturing/scanning palm vein bio data.</p>
 
-            <h2>Cloud Server</h2>
+            <h2>A. Cloud Server</h2>
             <p>The cloud server handles the storage and processing of the biometric data. It ensures data security and provides APIs for the app to interact with the database. The server also facilitates the synchronization of data between the app and the cloud.
             The cloud server consists of two main data components:</p>
             <ul>
@@ -79,7 +100,11 @@
                 <li><strong>Authentication Log Data:</strong> This section logs the authentication attempts, including the date, time, and result of each attempt. It helps in tracking and monitoring the authentication process.</li>
             </ul>
 
-            <h2>Mobile App</h2>
+            <!--<h3>Navigation</h3>-->
+            <button class="button" onclick="location.href='/users/veindata'">Go to Users Vein Data</button>
+            <button class="button" onclick="location.href='/auth/authdata'">Go to Authentication Log Data</button>
+
+            <h2>B. Mobile App</h2>
             <p>The Mobile IdentoSecure app uses a proprietary SDK together with a Palm Vein Scanner to perform real-time matching of palm vein data on Android devices. The app is developed and distributed by Sozuri Ltd.</p>
             <h3>Main Features of the IdentoSecure Mobile App:</h3>
             <ul>
@@ -89,10 +114,42 @@
                 <li>User-friendly interface</li>
                 <li>Comprehensive authentication logs</li>
             </ul>
+            <div class="screenshots">
+                <div class="screenshot">
+                    <img src="/assets/images/home.jpg" alt="Identosecure">
+                    <p>Idento Secure Palm Authentication</p>
+                </div>
+                <div class="screenshot">
+                    <img src="/assets/images/identify.jpg" alt="Identification">
+                    <p>Start Continous 1:Many Identification</p>
+                </div>
+                <div class="screenshot">
+                    <img src="/assets/images/identify2.jpg" alt="Identification">
+                    <p>Stop Continous 1:Many Identification</p>
+                </div>
+                <div class="screenshot">
+                    <img src="/assets/images/verify.jpg" alt="Verification">
+                    <p>1:1 Verification</p>
+                </div>
+                <div class="screenshot">
+                    <img src="/assets/images/enroll.jpg" alt="Enroll">
+                    <p>Enrollment of new customers</p>
+                </div>
+                <div class="screenshot">
+                    <img src="/assets/images/settings.jpg" alt="Settings">
+                    <p>Settings for operation & server sync</p>
+                </div>
+                <div class="screenshot">
+                    <img src="/assets/images/users.jpg" alt="Customers">
+                    <p>Customer Details</p>
+                </div>
+                <div class="screenshot">
+                    <img src="/assets/images/auth-logs.jpg" alt="Auth logs">
+                    <p>Authentication history Logs</p>
+                </div>
+
+            </div>
             <p>Interested in testing or developing with our technology? Get in touch with us at <a href="mailto:business@sozuri.net">business@sozuri.net</a>.</p>
-            <!--<h3>Navigation</h3>-->
-            <button class="button" onclick="location.href='/users/veindata'">Go to Users Vein Data</button>
-            <button class="button" onclick="location.href='/auth/authdata'">Go to Authentication Log Data</button>
         </div>
     </div>
 </body>
