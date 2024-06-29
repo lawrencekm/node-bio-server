@@ -30,6 +30,9 @@ app.use('/users', usersRoute);
 app.use('/auth', authenticationsRoute);
 app.use('/api', authApiRoute );
 
+app.get('/', (req, res) => {
+    res.render('index');
+});
 
 const port = process.env.PORT || 3008;
 app.listen(port, () => {

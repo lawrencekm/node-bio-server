@@ -3,67 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <title>AuthData Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #3e8e41;
+        }
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        .content {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            line-height: 1.6;
+            text-align: left;
+        }
+        ul {
+            text-align: left;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .pagination {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .pagination a {
+            color: #4CAF50;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 4px;
+            border-radius: 5px;
+        }
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+        .pagination a.active {
+            background-color: #4CAF50;
+            color: white;
+            border: 1px solid #4CAF50;
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <h1>AuthData Records</h1>
-    <form method="get" action="/authdata">
-        <input type="text" name="search" value="<%= searchQuery %>" placeholder="Search...">
-        <button type="submit">Search</button>
-    </form>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Client ID</th>
-                <th>User ID</th>
-                <th>Sensor Type</th>
-                <th>Data Type</th>
-                <th>Result</th>
-                <th>Retry Count</th>
-                <th>Authenticated At</th>
-                <th>Type</th>
-                <th>Silhouette</th>
-                <th>Name</th>
-                <th>Location</th>
-                <th>FAR Achieved</th>
-                <th>Synced</th>
-                <th>Client App ID</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% authdata.forEach(record => { %>
+    <div class="container">
+        <h1>Authentication Data Log Records</h1>
+        <button class="button" onclick="location.href='/'">Go back home</button>
+        <br>
+        <form method="get" action="/authdata">
+            <input type="text" name="search" value="<%= searchQuery %>" placeholder="Search...">
+            <button type="submit" class="button">Search</button>
+        </form>
+        <table>
+            <thead>
                 <tr>
-                    <td><%= record._id %></td>
-                    <td><%= record.client_id %></td>
-                    <td><%= record.user_id %></td>
-                    <td><%= record.sensortype %></td>
-                    <td><%= record.datatype %></td>
-                    <td><%= record.result %></td>
-                    <td><%= record.retryCount %></td>
-                    <td><%= record.authenticatedAt ? record.authenticatedAt.toLocaleString() : '' %></td>
-                    <td><%= record.type %></td>
-                    <td><%= record.silhouette || '' %></td>
-                    <td><%= record.name || '' %></td>
-                    <td><%= record.location || '' %></td>
-                    <td><%= record.farAchieved %></td>
-                    <td><%= record.synced %></td>
-                    <td><%= record.client_app_id || '' %></td>
-                    <td>
-                        <button onclick="deleteRecord('<%= record._id %>')">Delete</button>
-                    </td>
+                    <th>ID</th>
+                    <th>Client ID</th>
+                    <th>User ID</th>
+                    <th>Sensor Type</th>
+                    <th>Data Type</th>
+                    <th>Result</th>
+                    <th>Retry Count</th>
+                    <th>Authenticated At</th>
+                    <th>Type</th>
+                    <th>Silhouette</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>FAR Achieved</th>
+                    <th>Synced</th>
+                    <th>Client App ID</th>
+                    <th>Actions</th>
                 </tr>
-            <% }) %>
-        </tbody>
-    </table>
-    <div>
-        <% if (currentPage > 1) { %>
-            <a href="/authdata?page=<%= currentPage - 1 %>&search=<%= searchQuery %>">Previous</a>
-        <% } %>
-        <% if (currentPage < totalPages) { %>
-            <a href="/authdata?page=<%= currentPage + 1 %>&search=<%= searchQuery %>">Next</a>
-        <% } %>
+            </thead>
+            <tbody>
+                <% authdata.forEach(record => { %>
+                    <tr>
+                        <td><%= record._id %></td>
+                        <td><%= record.client_id %></td>
+                        <td><%= record.user_id %></td>
+                        <td><%= record.sensortype %></td>
+                        <td><%= record.datatype %></td>
+                        <td><%= record.result %></td>
+                        <td><%= record.retry_count %></td>
+                        <td><%= record.authenticated_at ? record.authenticated_at.toLocaleString() : '' %></td>
+                        <td><%= record.type %></td>
+                        <td><%= record.silhouette || '' %></td>
+                        <td><%= record.name || '' %></td>
+                        <td><%= record.location || '' %></td>
+                        <td><%= record.far_achieved %></td>
+                        <td><%= record.synced %></td>
+                        <td><%= record.client_app_id || '' %></td>
+                        <td>
+                            <button class="button" style="background-color: #f44336;" onclick="deleteRecord('<%= record._id %>')">Delete</button>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div class="pagination">
+            <% if (currentPage > 1) { %>
+                <a href="/authdata?page=<%= currentPage - 1 %>&search=<%= searchQuery %>">Previous</a>
+            <% } %>
+            <% if (currentPage < totalPages) { %>
+                <a href="/authdata?page=<%= currentPage + 1 %>&search=<%= searchQuery %>">Next</a>
+            <% } %>
+        </div>
+        <button class="button" onclick="location.href='/'">Go back home</button>
     </div>
     <script>
         function deleteRecord(id) {

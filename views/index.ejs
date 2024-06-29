@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+            margin: 10px;
+        }
+        .button:hover {
+            background-color: #3e8e41;
+        }
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+        .content {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            line-height: 1.6;
+            text-align: left;
+        }
+        ul {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Idento Secure by Sozuri Ltd</h1>
+        <div class="content">
+            <h2>About Idento Secure App & Cloud</h2>
+            <p>Idento Secure is designed to manage and process biometric data using palm vein authentication technology. It allows for the secure storage, retrieval, and analysis of user vein data and authentication logs.</p>
+            <h2>How It Works</h2>
+            <p>The infrastructure consists of a cloud server for remote/backup storage and a mobile app(with scanner device attached) for capturing/scanning palm vein bio data.</p>
+
+            <h2>Cloud Server</h2>
+            <p>The cloud server handles the storage and processing of the biometric data. It ensures data security and provides APIs for the app to interact with the database. The server also facilitates the synchronization of data between the app and the cloud.
+            The cloud server consists of two main data components:</p>
+            <ul>
+                <li><strong>User Vein Data:</strong> This section stores the palm vein data of registered users. The data is securely encrypted and stored in the database.</li>
+                <li><strong>Authentication Log Data:</strong> This section logs the authentication attempts, including the date, time, and result of each attempt. It helps in tracking and monitoring the authentication process.</li>
+            </ul>
+
+            <h2>Mobile App</h2>
+            <p>The Mobile IdentoSecure app uses a proprietary SDK together with a Palm Vein Scanner to perform real-time matching of palm vein data on Android devices. The app is developed and distributed by Sozuri Ltd.</p>
+            <h3>Main Features of the IdentoSecure Mobile App:</h3>
+            <ul>
+                <li>Real-time palm vein authentication</li>
+                <li>Secure data encryption and storage</li>
+                <li>Seamless synchronization with the cloud server</li>
+                <li>User-friendly interface</li>
+                <li>Comprehensive authentication logs</li>
+            </ul>
+            <p>Interested in testing or developing with our technology? Get in touch with us at <a href="mailto:business@sozuri.net">business@sozuri.net</a>.</p>
+            <!--<h3>Navigation</h3>-->
+            <button class="button" onclick="location.href='/users/veindata'">Go to Users Vein Data</button>
+            <button class="button" onclick="location.href='/auth/authdata'">Go to Authentication Log Data</button>
+        </div>
+    </div>
+</body>
+</html>
